@@ -1,0 +1,21 @@
+graph TD
+    A[Usuario] -->|Escribe una nota| B[Campo de texto]
+    B -->|Hace clic en Save| C[Evento 'submit' en el formulario]
+    C -->|Intercepta el evento| D[JavaScript en el navegador]
+    D -->|Envía petición POST /api/notes| E[Servidor]
+
+    subgraph Navegador
+        D
+    end
+
+    E -->|Servidor recibe los datos de la nota| F[Guardar la nota en la base de datos]
+    F -->|Confirmación de guardado| G[Base de datos]
+    G -->|Respuesta con la nueva nota| H[Servidor]
+    H -->|Respuesta HTTP con los datos de la nueva nota| I[JavaScript en el navegador]
+    I -->|Actualiza la lista de notas en la UI| J[Usuario ve la nueva nota]
+
+    classDef classNavegador fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef classServidor fill:#bbf,stroke:#333,stroke-width:2px;
+
+    class D,I classNavegador;
+    class E,F,H classServidor;
